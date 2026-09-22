@@ -1,0 +1,6 @@
+{
+  "name": "ЭкоНефтегорск — Викторина и Экогид",
+  "description": "Интерактивная экологическая викторина и справочник природопользования от Администрации муниципального района Нефтегорский.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

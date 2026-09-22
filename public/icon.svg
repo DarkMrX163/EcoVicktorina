@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="100%" height="100%">
+  <defs>
+    <!-- Gold / Yellow Gradients -->
+    <linearGradient id="goldField" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE033" />
+      <stop offset="60%" stop-color="#FFD100" />
+      <stop offset="100%" stop-color="#F5B800" />
+    </linearGradient>
+
+    <linearGradient id="wheatGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF385" />
+      <stop offset="40%" stop-color="#FFD700" />
+      <stop offset="80%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <!-- Azure Flame Gradients -->
+    <linearGradient id="flameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="40%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0369A1" />
+    </linearGradient>
+
+    <!-- Green Field Gradient -->
+    <linearGradient id="greenField" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#16A34A" />
+      <stop offset="100%" stop-color="#15803D" />
+    </linearGradient>
+
+    <!-- Clip Path for Shield Outline -->
+    <clipPath id="shieldClip">
+      <path d="M 15 15 L 385 15 C 385 15, 385 300, 385 325 C 385 415, 305 465, 200 488 C 95 465, 15 415, 15 325 Z" />
+    </clipPath>
+  </defs>
+
+  <!-- Shield Group with Clip -->
+  <g clip-path="url(#shieldClip)">
+    <!-- 1. Gold Upper Field -->
+    <rect x="0" y="0" width="400" height="500" fill="url(#goldField)" />
+
+    <!-- 2. Azure Flames rising into Gold Field -->
+    <!-- Stylized multi-tongued heraldic gas & oil fire -->
+    <path d="
+      M 15 300 
+      C 25 240, 20 200, 30 160 
+      C 40 210, 50 220, 60 180 
+      C 70 140, 75 100, 95 70 
+      C 105 130, 115 150, 130 120 
+      C 145 90, 160 60, 180 35 
+      C 190 70, 195 90, 200 40 
+      C 205 90, 210 70, 220 35 
+      C 240 60, 255 90, 270 120 
+      C 285 150, 295 130, 305 70 
+      C 325 100, 330 140, 340 180 
+      C 350 220, 360 210, 370 160 
+      C 380 200, 375 240, 385 300 
+      L 385 325 
+      L 200 135 
+      L 15 325 
+      Z" 
+      fill="url(#flameGrad)" 
+      stroke="#0284C7" 
+      stroke-width="1.5"
+    />
+
+    <!-- Inner flame highlights for depth -->
+    <path d="
+      M 40 290 
+      C 55 240, 60 190, 75 160 
+      C 85 200, 100 180, 110 140 
+      C 130 180, 145 130, 165 90 
+      C 180 130, 190 110, 200 70 
+      C 210 110, 220 130, 235 90 
+      C 255 130, 270 180, 290 140 
+      C 300 180, 315 200, 325 160 
+      C 340 190, 345 240, 360 290 
+      L 200 150 
+      Z" 
+      fill="#38BDF8" 
+      opacity="0.35"
+    />
+
+    <!-- 3. Lower Green Field -->
+    <path d="M 0 355 L 200 175 L 400 355 L 400 500 L 0 500 Z" fill="url(#greenField)" />
+
+    <!-- 4. Black Chevron (Стропило) with Gold & Black Borders -->
+    <!-- Gold accent rim for Chevron -->
+    <path d="M 10 328 L 200 138 L 390 328 L 390 368 L 200 178 L 10 368 Z" fill="#FFE033" />
+    
+    <!-- Main Black Chevron -->
+    <path d="M 12 332 L 200 144 L 388 332 L 388 362 L 200 174 L 12 362 Z" fill="#18181B" stroke="#09090B" stroke-width="1.5" />
+
+    <!-- 5. Golden Wheat Sheaf / Fountain (Золотой сноп колосьев) -->
+    <g id="wheatSheaf" transform="translate(0, -10)">
+      <!-- Sheaf Base / Stems -->
+      <path d="M 172 415 C 172 445, 178 465, 178 475 L 222 475 C 222 465, 228 445, 228 415 Z" fill="url(#wheatGold)" stroke="#B45309" stroke-width="2" />
+      
+      <!-- Stems Texture Lines -->
+      <line x1="186" y1="415" x2="188" y2="475" stroke="#B45309" stroke-width="1.5" />
+      <line x1="194" y1="415" x2="196" y2="475" stroke="#B45309" stroke-width="1.5" />
+      <line x1="200" y1="415" x2="200" y2="475" stroke="#B45309" stroke-width="1.5" />
+      <line x1="206" y1="415" x2="204" y2="475" stroke="#B45309" stroke-width="1.5" />
+      <line x1="214" y1="415" x2="212" y2="475" stroke="#B45309" stroke-width="1.5" />
+
+      <!-- Horizontal Ribbon / Band tying the sheaf -->
+      <rect x="170" y="408" width="60" height="12" rx="4" fill="#FFD700" stroke="#92400E" stroke-width="2" />
+      <line x1="172" y1="414" x2="228" y2="414" stroke="#D97706" stroke-width="1.5" />
+
+      <!-- Outer Flourishing Leaves / Cascading side plumes -->
+      <!-- Left Outer Plume -->
+      <path d="
+        M 172 410 
+        C 140 405, 110 395, 95 375 
+        C 80 355, 80 330, 95 315 
+        C 110 300, 135 310, 150 335 
+        C 165 360, 175 390, 185 410 
+        Z" 
+        fill="url(#wheatGold)" 
+        stroke="#B45309" 
+        stroke-width="2" 
+      />
+      <!-- Left plume details -->
+      <path d="M 95 315 C 115 325, 140 345, 172 410" stroke="#92400E" stroke-width="1.5" fill="none" />
+      <path d="M 85 345 C 105 340, 125 350, 150 380" stroke="#92400E" stroke-width="1" fill="none" />
+
+      <!-- Right Outer Plume -->
+      <path d="
+        M 228 410 
+        C 260 405, 290 395, 305 375 
+        C 320 355, 320 330, 305 315 
+        C 290 300, 265 310, 250 335 
+        C 235 360, 225 390, 215 410 
+        Z" 
+        fill="url(#wheatGold)" 
+        stroke="#B45309" 
+        stroke-width="2" 
+      />
+      <!-- Right plume details -->
+      <path d="M 305 315 C 285 325, 260 345, 228 410" stroke="#92400E" stroke-width="1.5" fill="none" />
+      <path d="M 315 345 C 295 340, 275 350, 250 380" stroke="#92400E" stroke-width="1" fill="none" />
+
+      <!-- Intermediate Upper-Left Plume / Ears -->
+      <path d="
+        M 175 410 
+        C 150 380, 125 330, 135 295 
+        C 145 265, 175 270, 185 295 
+        C 195 320, 190 370, 188 410 
+        Z" 
+        fill="url(#wheatGold)" 
+        stroke="#B45309" 
+        stroke-width="2" 
+      />
+      <path d="M 135 295 C 150 315, 165 355, 180 410" stroke="#92400E" stroke-width="1.5" fill="none" />
+
+      <!-- Intermediate Upper-Right Plume / Ears -->
+      <path d="
+        M 225 410 
+        C 250 380, 275 330, 265 295 
+        C 255 265, 225 270, 215 295 
+        C 205 320, 210 370, 212 410 
+        Z" 
+        fill="url(#wheatGold)" 
+        stroke="#B45309" 
+        stroke-width="2" 
+      />
+      <path d="M 265 295 C 250 315, 235 355, 220 410" stroke="#92400E" stroke-width="1.5" fill="none" />
+
+      <!-- Central Upright Golden Wheat Ears (Центральный сноп) -->
+      <path d="
+        M 185 410 
+        C 180 360, 175 300, 185 260 
+        C 190 240, 200 230, 200 230 
+        C 200 230, 210 240, 215 260 
+        C 225 300, 220 360, 215 410 
+        Z" 
+        fill="url(#wheatGold)" 
+        stroke="#B45309" 
+        stroke-width="2" 
+      />
+      <line x1="200" y1="235" x2="200" y2="410" stroke="#92400E" stroke-width="2" />
+
+      <!-- Wheat Grain Details in Center Sheaf -->
+      <!-- Left side grains -->
+      <ellipse cx="193" cy="255" rx="5" ry="8" transform="rotate(-25 193 255)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+      <ellipse cx="191" cy="275" rx="6" ry="9" transform="rotate(-25 191 275)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+      <ellipse cx="190" cy="298" rx="6" ry="10" transform="rotate(-20 190 298)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+      <ellipse cx="190" cy="323" rx="7" ry="11" transform="rotate(-15 190 323)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+      <ellipse cx="191" cy="350" rx="7" ry="12" transform="rotate(-10 191 350)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+      <ellipse cx="192" cy="378" rx="7" ry="12" transform="rotate(-5 192 378)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+
+      <!-- Right side grains -->
+      <ellipse cx="207" cy="255" rx="5" ry="8" transform="rotate(25 207 255)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+      <ellipse cx="209" cy="275" rx="6" ry="9" transform="rotate(25 209 275)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+      <ellipse cx="210" cy="298" rx="6" ry="10" transform="rotate(20 210 298)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+      <ellipse cx="210" cy="323" rx="7" ry="11" transform="rotate(15 210 323)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+      <ellipse cx="209" cy="350" rx="7" ry="12" transform="rotate(10 209 350)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+      <ellipse cx="208" cy="378" rx="7" ry="12" transform="rotate(5 208 378)" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+
+      <!-- Top Grain -->
+      <ellipse cx="200" cy="240" rx="4" ry="7" fill="#FEF08A" stroke="#B45309" stroke-width="1.2" />
+
+      <!-- Delicate Wheat Beards / Awns (Ости) -->
+      <line x1="200" y1="233" x2="200" y2="210" stroke="#B45309" stroke-width="1.2" />
+      <line x1="193" y1="248" x2="182" y2="225" stroke="#B45309" stroke-width="1" />
+      <line x1="207" y1="248" x2="218" y2="225" stroke="#B45309" stroke-width="1" />
+      <line x1="188" y1="268" x2="170" y2="245" stroke="#B45309" stroke-width="1" />
+      <line x1="212" y1="268" x2="230" y2="245" stroke="#B45309" stroke-width="1" />
+    </g>
+  </g>
+
+  <!-- Outer Shield Border Line -->
+  <path d="M 15 15 L 385 15 C 385 15, 385 300, 385 325 C 385 415, 305 465, 200 488 C 95 465, 15 415, 15 325 Z" 
+        fill="none" 
+        stroke="#1E293B" 
+        stroke-width="5" 
+        stroke-linejoin="round" 
+  />
+  
+  <!-- Subtle Inner Gold Fillet -->
+  <path d="M 18 18 L 382 18 C 382 18, 382 300, 382 324 C 382 412, 303 461, 200 484 C 97 461, 18 412, 18 324 Z" 
+        fill="none" 
+        stroke="#F59E0B" 
+        stroke-width="1.5" 
+        opacity="0.8"
+  />
+</svg>

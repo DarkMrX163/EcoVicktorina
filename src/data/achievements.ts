@@ -1,0 +1,68 @@
+import { Achievement } from '../types';
+
+export const INITIAL_ACHIEVEMENTS: Achievement[] = [
+  {
+    id: 'first-step',
+    title: 'Первый эко-шаг',
+    description: 'Ответьте правильно хотя бы на 1 вопрос викторины',
+    icon: 'Sparkles',
+    unlocked: false,
+    badgeCategory: 'general',
+  },
+  {
+    id: 'tko-master',
+    title: 'Мастер раздельного сбора',
+    description: 'Наберите более 1500 очков в категории «ТКО»',
+    icon: 'Trash2',
+    unlocked: false,
+    badgeCategory: 'tko',
+  },
+  {
+    id: 'water-guard',
+    title: 'Хранитель рек Нефтегорска',
+    description: 'Пройдите викторину по водопользованию без единой ошибки',
+    icon: 'Droplets',
+    unlocked: false,
+    badgeCategory: 'water',
+  },
+  {
+    id: 'water-code-expert',
+    title: 'Знаток Водного кодекса РФ',
+    description: 'Правильно ответьте на вопросы о водоохранных зонах и прибрежных полосах',
+    icon: 'ShieldCheck',
+    unlocked: false,
+    badgeCategory: 'water',
+  },
+  {
+    id: 'streak-5',
+    title: 'Безупречная серия (5 в ряд)',
+    description: 'Дайте 5 правильных ответов подряд без подсказок',
+    icon: 'Zap',
+    unlocked: false,
+    badgeCategory: 'speed',
+  },
+  {
+    id: 'neftegorsk-patriot',
+    title: 'Патриот родного края',
+    description: 'Успешно завершите блок «Природа Нефтегорского района»',
+    icon: 'Trees',
+    unlocked: false,
+    badgeCategory: 'nature',
+  },
+  {
+    id: 'barinovka-champion',
+    title: 'Знаток Бариновки и Ветлянки',
+    description: 'Дайте верные ответы на вопросы о Бариновской мельнице и Ветлянском водохранилище',
+    icon: 'Compass',
+    unlocked: false,
+    badgeCategory: 'nature',
+  },
+  {
+    id: 'top-inspector',
+    title: 'Главный эко-инспектор',
+    description: 'Наберите более 2800 баллов и войдите в высший ранг района',
+    icon: 'Crown',
+    unlocked: false,
+    badgeCategory: 'general',
+  },
+];
