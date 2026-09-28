@@ -1,26 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
   <defs>
+    <!-- Clip to Shield Shape -->
     <clipPath id="neftegorskShieldClip">
       <path d="M 20,20 L 380,20 L 380,310 C 380,420 280,470 200,488 C 120,470 20,420 20,310 Z" />
     </clipPath>
+
+    <!-- Gradients for Wheat Sheaf -->
     <linearGradient id="goldGrain" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FFE082"/>
       <stop offset="50%" stop-color="#FFB300"/>
       <stop offset="100%" stop-color="#E65100"/>
     </linearGradient>
+
     <linearGradient id="goldStem" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#FFCA28"/>
       <stop offset="100%" stop-color="#F57F17"/>
     </linearGradient>
   </defs>
 
+  <!-- Outer Shield Frame with Shadow -->
   <g clip-path="url(#neftegorskShieldClip)">
+    
+    <!-- 1. Top Field: Bright Yellow -->
     <rect x="0" y="0" width="400" height="500" fill="#FFDC00" />
+
+    <!-- 2. Blue Flames (Rising from Chevron) -->
     <path d="
       M 15,310
       Q 25,270 32,230 Q 38,260 45,210 Q 55,250 68,180 Q 75,230 88,160 Q 98,220 112,130 Q 122,190 138,110 Q 148,180 162,80 Q 172,150 185,50 Q 192,100 200,20 Q 208,100 215,50 Q 228,150 238,80 Q 252,180 262,110 Q 278,190 288,130 Q 302,220 312,160 Q 325,230 332,180 Q 345,250 355,210 Q 362,260 368,230 Q 375,270 385,310
       L 385,360 L 200,180 L 15,360 Z
     " fill="#009BEA" stroke="#0077C8" stroke-width="2" />
+
+    <!-- 3. Black Chevron (Inverted V) -->
     <path d="
       M 15,310
       L 200,120
@@ -29,6 +40,8 @@
       L 200,180
       L 15,370 Z
     " fill="#1C1D21" stroke="#FFDC00" stroke-width="3" />
+
+    <!-- 4. Lower Field: Emerald Green -->
     <path d="
       M 15,370
       L 200,180
@@ -36,12 +49,20 @@
       L 385,500
       L 15,500 Z
     " fill="#009A44" />
+
+    <!-- 5. Golden Wheat Sheaf (Сноп пшеницы) -->
     <g transform="translate(200, 390)">
+      
+      <!-- Stems extending to bottom -->
       <path d="M -22,10 C -15,40 0,75 0,82 C 0,75 15,40 22,10 Z" fill="url(#goldStem)" stroke="#D84315" stroke-width="1.5" />
       <path d="M -12,10 L -2,80 M 0,10 L 0,82 M 12,10 L 2,80" stroke="#FFE082" stroke-width="1.5" opacity="0.8" />
+
+      <!-- Triple Gold Band at Waist -->
       <rect x="-26" y="0" width="52" height="6" rx="2" fill="#FFE082" stroke="#E65100" stroke-width="1.5" />
       <rect x="-28" y="7" width="56" height="6" rx="2" fill="#FFB300" stroke="#E65100" stroke-width="1.5" />
       <rect x="-26" y="14" width="52" height="6" rx="2" fill="#FFE082" stroke="#E65100" stroke-width="1.5" />
+
+      <!-- Central Vertical Wheat Ear -->
       <g transform="translate(0, -60)">
         <path d="M 0,60 L 0,-60" stroke="#FFB300" stroke-width="3" />
         <ellipse cx="-7" cy="-45" rx="7" ry="12" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
@@ -55,6 +76,8 @@
         <ellipse cx="0" cy="-62" rx="6" ry="10" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
         <path d="M 0,-70 L -12,-90 M 0,-70 L 0,-95 M 0,-70 L 12,-90 M -6,-50 L -22,-70 M 6,-50 L 22,-70" stroke="#FFF59D" stroke-width="1.5" stroke-linecap="round" />
       </g>
+
+      <!-- Inner Left Wheat Ear (-18 deg) -->
       <g transform="rotate(-18) translate(0, -55)">
         <path d="M 0,55 L 0,-50" stroke="#FFB300" stroke-width="3" />
         <ellipse cx="-7" cy="-35" rx="7" ry="12" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
@@ -66,6 +89,8 @@
         <ellipse cx="0" cy="-50" rx="6" ry="10" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
         <path d="M 0,-58 L -15,-78 M 0,-58 L -3,-82 M 0,-58 L 10,-78" stroke="#FFF59D" stroke-width="1.5" stroke-linecap="round" />
       </g>
+
+      <!-- Inner Right Wheat Ear (+18 deg) -->
       <g transform="rotate(18) translate(0, -55)">
         <path d="M 0,55 L 0,-50" stroke="#FFB300" stroke-width="3" />
         <ellipse cx="-7" cy="-35" rx="7" ry="12" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
@@ -77,6 +102,8 @@
         <ellipse cx="0" cy="-50" rx="6" ry="10" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
         <path d="M 0,-58 L -10,-78 M 0,-58 L 3,-82 M 0,-58 L 15,-78" stroke="#FFF59D" stroke-width="1.5" stroke-linecap="round" />
       </g>
+
+      <!-- Mid Left Wheat Ear (-36 deg) -->
       <g transform="rotate(-36) translate(0, -50)">
         <path d="M 0,50 L 0,-42" stroke="#FFB300" stroke-width="3" />
         <ellipse cx="-7" cy="-28" rx="7" ry="11" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
@@ -88,6 +115,8 @@
         <ellipse cx="0" cy="-42" rx="5" ry="9" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
         <path d="M 0,-48 L -18,-66 M 0,-48 L -6,-70 M 0,-48 L 8,-66" stroke="#FFF59D" stroke-width="1.5" stroke-linecap="round" />
       </g>
+
+      <!-- Mid Right Wheat Ear (+36 deg) -->
       <g transform="rotate(36) translate(0, -50)">
         <path d="M 0,50 L 0,-42" stroke="#FFB300" stroke-width="3" />
         <ellipse cx="-7" cy="-28" rx="7" ry="11" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
@@ -99,6 +128,8 @@
         <ellipse cx="0" cy="-42" rx="5" ry="9" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
         <path d="M 0,-48 L -8,-66 M 0,-48 L 6,-70 M 0,-48 L 18,-66" stroke="#FFF59D" stroke-width="1.5" stroke-linecap="round" />
       </g>
+
+      <!-- Outer Left Wheat Ear (-54 deg) -->
       <g transform="rotate(-54) translate(0, -42)">
         <path d="M 0,42 L 0,-35" stroke="#FFB300" stroke-width="2.5" />
         <ellipse cx="-6" cy="-22" rx="6" ry="10" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
@@ -108,6 +139,8 @@
         <ellipse cx="0" cy="-35" rx="5" ry="8" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
         <path d="M 0,-40 L -18,-55 M 0,-40 L -8,-58" stroke="#FFF59D" stroke-width="1.5" stroke-linecap="round" />
       </g>
+
+      <!-- Outer Right Wheat Ear (+54 deg) -->
       <g transform="rotate(54) translate(0, -42)">
         <path d="M 0,42 L 0,-35" stroke="#FFB300" stroke-width="2.5" />
         <ellipse cx="-6" cy="-22" rx="6" ry="10" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
@@ -117,7 +150,10 @@
         <ellipse cx="0" cy="-35" rx="5" ry="8" fill="url(#goldGrain)" stroke="#D84315" stroke-width="1" />
         <path d="M 0,-40 L 8,-58 M 0,-40 L 18,-55" stroke="#FFF59D" stroke-width="1.5" stroke-linecap="round" />
       </g>
+
     </g>
   </g>
+
+  <!-- Outer Black Shield Border Line -->
   <path d="M 20,20 L 380,20 L 380,310 C 380,420 280,470 200,488 C 120,470 20,420 20,310 Z" fill="none" stroke="#1C1D21" stroke-width="6" />
 </svg>

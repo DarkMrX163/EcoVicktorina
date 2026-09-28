@@ -73,7 +73,7 @@ export const ParticipantModal: React.FC<ParticipantModalProps> = ({
           {/* Header */}
           <div className="flex items-center gap-3 mb-5">
             <div className="w-10 h-12 flex items-center justify-center shrink-0">
-              <img src="/icon.svg" alt="Герб Нефтегорского района" className="w-full h-full object-contain" />
+              <img src="/coat-of-arms.svg" alt="Герб Нефтегорского района" className="w-full h-full object-contain" />
             </div>
             <div>
               <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase text-emerald-700 dark:text-emerald-400 tracking-wider">

@@ -17,7 +17,8 @@ import {
   LifelineState 
 } from './types';
 import { QUESTIONS, CATEGORIES } from './data/questions';
-import { unlockAchievement, getUserProfile, saveUserProfile } from './utils/storage';
+import { unlockAchievement, getUserProfile, saveUserProfile, getRankForScore } from './utils/storage';
+import { CertificateModal } from './components/CertificateModal';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<NavTab>('quiz');
@@ -26,6 +27,9 @@ export default function App() {
   const [session, setSession] = useState<QuizSessionState | null>(null);
   const [isQuizActive, setIsQuizActive] = useState<boolean>(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState<boolean>(false);
+
+  // Direct Certificate Modal State
+  const [isGlobalCertOpen, setIsGlobalCertOpen] = useState<boolean>(false);
 
   // Participant Registration Modal State
   const [pendingQuizStart, setPendingQuizStart] = useState<{ categoryId: CategoryId | 'all'; questionCount: number } | null>(null);
@@ -209,6 +213,10 @@ export default function App() {
     return found ? found.title : catId;
   };
 
+  const savedProfile = getUserProfile();
+  const certScore = session?.score || 2500;
+  const certRank = getRankForScore(certScore);
+
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-stone-50 dark:bg-zinc-950 text-stone-900 dark:text-zinc-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif] transition-colors duration-200">
@@ -218,6 +226,7 @@ export default function App() {
           currentTab={currentTab}
           onSelectTab={setCurrentTab}
           onResetQuiz={handleResetQuiz}
+          onOpenCertificate={() => setIsGlobalCertOpen(true)}
           isQuizActive={isQuizActive}
         />
 
@@ -271,6 +280,7 @@ export default function App() {
                 <QuizHome
                   onStartQuiz={handleStartQuiz}
                   onOpenTips={() => setCurrentTab('tips')}
+                  onOpenCertificate={() => setIsGlobalCertOpen(true)}
                 />
               )}
             </>
@@ -290,6 +300,18 @@ export default function App() {
           )}
 
         </main>
+
+        {/* Global Certificate Modal */}
+        <CertificateModal
+          isOpen={isGlobalCertOpen}
+          onClose={() => setIsGlobalCertOpen(false)}
+          playerName={savedProfile.name || 'Участник викторины'}
+          settlement={savedProfile.settlement || 'г. Нефтегорск'}
+          score={certScore}
+          correctPercentage={session ? Math.round((session.correctAnswersCount / session.questions.length) * 100) : 90}
+          rank={certRank}
+          categoryTitle={getCategoryTitle(session?.selectedCategory)}
+        />
 
         {/* Participant Name & Settlement Modal */}
         <ParticipantModal
@@ -316,7 +338,7 @@ export default function App() {
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-10 flex items-center justify-center filter drop-shadow-sm shrink-0">
-                <img src="/icon.svg" alt="Герб Нефтегорского района" className="w-full h-full object-contain" />
+                <img src="/coat-of-arms.svg" alt="Герб Нефтегорского района" className="w-full h-full object-contain" />
               </div>
               <div>
                 <p className="font-bold text-stone-800 dark:text-zinc-200">

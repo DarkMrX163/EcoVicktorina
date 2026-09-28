@@ -23,11 +23,13 @@ import { CATEGORIES } from '../data/questions';
 interface QuizHomeProps {
   onStartQuiz: (categoryId: CategoryId | 'all', questionCount: number) => void;
   onOpenTips: () => void;
+  onOpenCertificate?: () => void;
 }
 
 export const QuizHome: React.FC<QuizHomeProps> = ({
   onStartQuiz,
   onOpenTips,
+  onOpenCertificate,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryId | 'all'>('all');
   const [questionCount, setQuestionCount] = useState<number>(10);
@@ -177,27 +179,53 @@ export const QuizHome: React.FC<QuizHomeProps> = ({
         </div>
       </div>
 
-      {/* Eco-Tips Promo Mini-Banner */}
-      <div className="bg-stone-50 dark:bg-zinc-800/50 rounded-3xl p-6 border border-stone-200 dark:border-zinc-700/60 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 flex items-center justify-center shrink-0">
-            <BookOpen className="w-5 h-5" />
+      {/* Eco-Tips Promo & Certificate Promo Mini-Banners */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {onOpenCertificate && (
+          <div className="bg-gradient-to-r from-amber-900/10 via-emerald-900/10 to-teal-900/10 dark:from-amber-950/40 dark:to-emerald-950/40 rounded-3xl p-6 border border-amber-300/40 dark:border-amber-800/40 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 flex items-center justify-center shrink-0">
+                <Award className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-sm font-bold text-stone-900 dark:text-white">
+                  Именной Экологический Сертификат
+                </h4>
+                <p className="text-xs text-stone-500 dark:text-zinc-400 mt-0.5">
+                  Укажите Имя и Отчество и скачайте официальный сертификат в PNG/PDF.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenCertificate}
+              className="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold shadow-sm transition shrink-0"
+            >
+              Скачать сертификат
+            </button>
           </div>
-          <div>
-            <h4 className="text-sm font-bold text-stone-900 dark:text-white">
-              Памятка по экологической грамотности
-            </h4>
-            <p className="text-xs text-stone-500 dark:text-zinc-400 mt-0.5">
-              Правила раздельного сбора ТКО, водоохранные зоны рек по Водному кодексу РФ и охрана природы Нефтегорского района.
-            </p>
+        )}
+
+        <div className="bg-stone-50 dark:bg-zinc-800/50 rounded-3xl p-6 border border-stone-200 dark:border-zinc-700/60 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 flex items-center justify-center shrink-0">
+              <BookOpen className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-stone-900 dark:text-white">
+                Памятка по эко-грамотности
+              </h4>
+              <p className="text-xs text-stone-500 dark:text-zinc-400 mt-0.5">
+                Раздельный сбор ТКО и Водный кодекс РФ.
+              </p>
+            </div>
           </div>
+          <button
+            onClick={onOpenTips}
+            className="px-4 py-2.5 rounded-xl bg-white dark:bg-zinc-800 text-stone-800 dark:text-zinc-200 text-xs font-bold border border-stone-200 dark:border-zinc-700 hover:bg-stone-100 dark:hover:bg-zinc-700 transition shrink-0"
+          >
+            Читать советы
+          </button>
         </div>
-        <button
-          onClick={onOpenTips}
-          className="px-4 py-2 rounded-xl bg-white dark:bg-zinc-800 text-stone-800 dark:text-zinc-200 text-xs font-bold border border-stone-200 dark:border-zinc-700 hover:bg-stone-100 dark:hover:bg-zinc-700 transition"
-        >
-          Читать советы
-        </button>
       </div>
 
     </div>

@@ -10,6 +10,7 @@ interface HeaderProps {
   currentTab: NavTab;
   onSelectTab: (tab: NavTab) => void;
   onResetQuiz?: () => void;
+  onOpenCertificate?: () => void;
   isQuizActive?: boolean;
 }
 
@@ -17,6 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
   currentTab,
   onSelectTab,
   onResetQuiz,
+  onOpenCertificate,
   isQuizActive,
 }) => {
   const { theme, toggleTheme } = useTheme();
@@ -79,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <div className="relative w-10 h-12 sm:w-11 sm:h-14 flex items-center justify-center filter drop-shadow-md group-hover:scale-105 transition-transform">
               <img 
-                src="/icon.svg" 
+                src="/coat-of-arms.svg" 
                 alt="Герб Нефтегорского района" 
                 className="w-full h-full object-contain"
               />
@@ -148,6 +150,17 @@ export const Header: React.FC<HeaderProps> = ({
               <Award className="w-4 h-4" />
               <span>Награды</span>
             </button>
+
+            {onOpenCertificate && (
+              <button
+                onClick={onOpenCertificate}
+                className="flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/50 hover:bg-amber-100 transition shadow-sm"
+                title="Открыть и скачать свой сертификат"
+              >
+                <Award className="w-4 h-4 text-amber-500" />
+                <span>Сертификат</span>
+              </button>
+            )}
           </nav>
 
           {/* Right Action Tools: PWA Install + Theme Toggle + Exit Game (if active) */}
@@ -228,6 +241,15 @@ export const Header: React.FC<HeaderProps> = ({
             <Award className="w-4 h-4" />
             <span>Награды</span>
           </button>
+          {onOpenCertificate && (
+            <button
+              onClick={onOpenCertificate}
+              className="flex flex-col items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-bold shrink-0 text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/40"
+            >
+              <Award className="w-4 h-4 text-amber-500" />
+              <span>Грамота</span>
+            </button>
+          )}
         </div>
       </div>
 
