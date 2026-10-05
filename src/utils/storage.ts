@@ -6,127 +6,66 @@ const LEADERBOARD_KEY = 'neftegorsk_eco_leaderboard_v1';
 const ACHIEVEMENTS_KEY = 'neftegorsk_eco_achievements_v1';
 const USER_PROFILE_KEY = 'neftegorsk_eco_user_profile_v1';
 
-const SEED_LEADERBOARD: LeaderboardEntry[] = [
-  {
-    id: 'lead-1',
-    playerName: 'Алексей Смирнов',
-    settlement: 'г. Нефтегорск',
-    score: 2950,
-    correctPercentage: 95,
-    category: 'all',
-    mode: 'marathon',
-    date: '2026-09-18',
-    rankTitle: 'Главный общественный эко-инспектор Нефтегорского района',
-  },
-  {
-    id: 'lead-2',
-    playerName: 'Елена Кузнецова',
-    settlement: 'с. Утёвка',
-    score: 2780,
-    correctPercentage: 90,
-    category: 'tko',
-    mode: 'category',
-    date: '2026-09-19',
-    rankTitle: 'Мастер ресурсосбережения',
-  },
-  {
-    id: 'lead-3',
-    playerName: 'Дмитрий Волков',
-    settlement: 'с. Бариновка',
-    score: 2640,
-    correctPercentage: 85,
-    category: 'nature_neftegorsk',
-    mode: 'category',
-    date: '2026-09-20',
-    rankTitle: 'Мастер ресурсосбережения',
-  },
-  {
-    id: 'lead-4',
-    playerName: 'Мария Васильева',
-    settlement: 'с. Богдановка',
-    score: 2450,
-    correctPercentage: 80,
-    category: 'water',
-    mode: 'category',
-    date: '2026-09-20',
-    rankTitle: 'Мастер ресурсосбережения',
-  },
-  {
-    id: 'lead-5',
-    playerName: 'Иван Морозов',
-    settlement: 'с. Кулешовка',
-    score: 2280,
-    correctPercentage: 80,
-    category: 'water',
-    mode: 'category',
-    date: '2026-09-21',
-    rankTitle: 'Мастер ресурсосбережения',
-  },
-  {
-    id: 'lead-6',
-    playerName: 'Анна Соколова',
-    settlement: 'п. Ветлянка',
-    score: 1980,
-    correctPercentage: 75,
-    category: 'water',
-    mode: 'category',
-    date: '2026-09-21',
-    rankTitle: 'Знаток экологии Нефтегорска',
-  },
-  {
-    id: 'lead-7',
-    playerName: 'Сергей Попов',
-    settlement: 'с. Зуевка',
-    score: 1850,
-    correctPercentage: 70,
-    category: 'tko',
-    mode: 'category',
-    date: '2026-09-22',
-    rankTitle: 'Знаток экологии Нефтегорска',
-  },
-  {
-    id: 'lead-8',
-    playerName: 'Татьяна Федорова',
-    settlement: 'с. Дмитриевка',
-    score: 1620,
-    correctPercentage: 65,
-    category: 'nature_neftegorsk',
-    mode: 'category',
-    date: '2026-09-22',
-    rankTitle: 'Знаток экологии Нефтегорска',
-  },
-];
+const SEED_LEADERBOARD: LeaderboardEntry[] = [];
 
 export function getLeaderboard(): LeaderboardEntry[] {
   try {
     const saved = localStorage.getItem(LEADERBOARD_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed;
+      if (Array.isArray(parsed)) {
+        // Clean out legacy seed IDs if any were present
+        const filtered = parsed.filter((item: LeaderboardEntry) => 
+          !item.id.startsWith('lead-1') && 
+          !item.id.startsWith('lead-2') && 
+          !item.id.startsWith('lead-3') && 
+          !item.id.startsWith('lead-4') && 
+          !item.id.startsWith('lead-5') && 
+          !item.id.startsWith('lead-6') && 
+          !item.id.startsWith('lead-7') && 
+          !item.id.startsWith('lead-8')
+        );
+        if (filtered.length !== parsed.length) {
+          localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(filtered));
+        }
+        return filtered;
       }
     }
   } catch (e) {
     console.error('Failed to load leaderboard', e);
   }
-  return SEED_LEADERBOARD;
+  return [];
 }
 
 export function saveLeaderboardEntry(entry: Omit<LeaderboardEntry, 'id' | 'date'>): LeaderboardEntry {
   const current = getLeaderboard();
   const newEntry: LeaderboardEntry = {
     ...entry,
-    id: 'lead-' + Date.now(),
+    id: 'lead-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
     date: new Date().toISOString().split('T')[0],
   };
   
-  const updated = [newEntry, ...current].sort((a, b) => b.score - a.score).slice(0, 50);
+  const updated = [newEntry, ...current].sort((a, b) => b.score - a.score).slice(0, 100);
   try {
     localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(updated));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('leaderboard_updated'));
+    }
   } catch (e) {
     console.error('Failed to save entry', e);
   }
   return newEntry;
+}
+
+export function clearLeaderboard(): void {
+  try {
+    localStorage.removeItem(LEADERBOARD_KEY);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('leaderboard_updated'));
+    }
+  } catch (e) {
+    console.error('Failed to clear leaderboard', e);
+  }
 }
 
 export function getRankForScore(score: number) {

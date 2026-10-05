@@ -59,6 +59,19 @@ export const QuizResults: React.FC<QuizResultsProps> = ({
       origin: { y: 0.6 },
       colors: ['#059669', '#10B981', '#38BDF8', '#F59E0B', '#8B5CF6'],
     });
+
+    // Immediately record quiz result into leaderboard upon completion
+    const finalPlayerName = profile.name.trim() || 'Участник викторины';
+    saveLeaderboardEntry({
+      playerName: finalPlayerName,
+      settlement: profile.settlement || 'г. Нефтегорск',
+      score: session.score,
+      correctPercentage: percentage,
+      category: session.selectedCategory,
+      mode: session.mode,
+      rankTitle: rank.title,
+    });
+    setIsSaved(true);
   }, []);
 
   const handleSaveScore = (e: React.FormEvent) => {

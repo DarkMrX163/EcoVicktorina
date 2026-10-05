@@ -27,6 +27,20 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ onStartQuiz }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Real-time synchronization whenever anyone finishes a quiz
+  React.useEffect(() => {
+    const handleUpdate = () => {
+      setEntries(getLeaderboard());
+    };
+
+    window.addEventListener('leaderboard_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+    return () => {
+      window.removeEventListener('leaderboard_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
+  }, []);
+
   // Filtered leaderboard
   const filteredEntries = entries.filter((entry) => {
     const matchesSettlement = selectedSettlement === 'all' || entry.settlement === selectedSettlement;
