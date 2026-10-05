@@ -188,7 +188,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
     ctx.fillStyle = '#44403c';
     ctx.font = '14px sans-serif';
-    ctx.fillText('Самарская область • Отдел экологии, природных ресурсов и ЖКХ', 600, 208);
+    ctx.fillText('Самарская область • Отдел экологии и природных ресурсов', 600, 208);
 
     // Eco Badge Pill
     ctx.fillStyle = '#f0fdf4';
@@ -230,11 +230,23 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
     ctx.lineTo(900, 442);
     ctx.stroke();
 
+    // Achievement Phrase depending on category
+    const lowerCategory = (categoryTitle || '').toLowerCase();
+    let achievementPhrase = '';
+    if (lowerCategory.includes('водопользование') || lowerCategory.includes('водн')) {
+      achievementPhrase = 'Уверенные знания водоохранного законодательства';
+    } else if (lowerCategory.includes('тко') || lowerCategory.includes('отход') || lowerCategory.includes('сортировк')) {
+      achievementPhrase = 'Отличное понимание раздельного сбора отходов';
+    }
+
     // Body
     ctx.fillStyle = '#1c1917';
     ctx.font = '16px sans-serif';
     ctx.fillText(`представляющий ${settlement || 'Нефтегорский район'},`, 600, 480);
-    ctx.fillText(`успешно прошёл(ла) викторину «ЭкоНефтегорск» по теме:`, 600, 512);
+    const canvasBodyText = achievementPhrase
+      ? `успешно прошёл(ла) викторину «ЭкоНефтегорск» (${achievementPhrase}) по теме:`
+      : `успешно прошёл(ла) викторину «ЭкоНефтегорск» по теме:`;
+    ctx.fillText(canvasBodyText, 600, 512);
 
     // Category Pill
     ctx.fillStyle = '#f0fdf4';
@@ -596,7 +608,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
               Администрация муниципального района Нефтегорский
             </p>
             <p className="text-[9px] sm:text-[10px] font-sans text-stone-600 uppercase tracking-wider">
-              Самарская область • Отдел экологии, природных ресурсов и ЖКХ
+              Самарская область • Отдел экологии и природных ресурсов
             </p>
 
             <div className="py-2">
@@ -632,9 +644,21 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
               представляющий <strong>{settlement || 'Нефтегорский район'}</strong>,
             </p>
 
-            <p className="text-xs sm:text-sm text-stone-800 leading-relaxed font-sans max-w-xl mx-auto pt-1">
-              успешно прошёл(ла) муниципальную викторину <strong>«ЭкоНефтегорск»</strong>, показав отличные знания по охране природы, раздельному сбору отходов, экологии Волжского бассейна и экологам-защитникам Самарской области по теме:
-            </p>
+            {(() => {
+              const lowerCat = (categoryTitle || '').toLowerCase();
+              let ach = '';
+              if (lowerCat.includes('водопользование') || lowerCat.includes('водн')) {
+                ach = 'уверенные знания водоохранного законодательства';
+              } else if (lowerCat.includes('тко') || lowerCat.includes('отход') || lowerCat.includes('сортировк')) {
+                ach = 'отличное понимание раздельного сбора отходов';
+              }
+              return (
+                <p className="text-xs sm:text-sm text-stone-800 leading-relaxed font-sans max-w-xl mx-auto pt-1">
+                  успешно прошёл(ла) муниципальную викторину <strong>«ЭкоНефтегорск»</strong>
+                  {ach ? `, показав ${ach}` : ''} по теме:
+                </p>
+              );
+            })()}
 
             <div className="inline-block px-4 py-1.5 rounded-xl bg-emerald-900/10 border border-emerald-900/20 font-sans text-xs sm:text-sm font-bold text-emerald-950 my-1">
               «{categoryTitle}»

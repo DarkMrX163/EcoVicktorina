@@ -65,7 +65,7 @@ export const QuizHome: React.FC<QuizHomeProps> = ({
           </h1>
 
           <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed font-normal">
-            Проверьте свои знания в сфере природопользования, раздельного сбора твердых коммунальных отходов, водоохранных зон рек Самара и Чапаевка по Водному кодексу РФ и памятников природы Самарского Заволжья.
+            Проверьте свои знания в сфере экологии и природопользования
           </p>
 
           <div className="flex flex-wrap gap-3 pt-2">
