@@ -92,7 +92,7 @@ export const Header: React.FC<HeaderProps> = ({
                   ЭкоНефтегорск
                 </span>
                 <span className="hidden md:inline-block px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300">
-                  Викторина 2026
+                  Викторина
                 </span>
               </div>
               <p className="text-xs text-stone-500 dark:text-zinc-400 hidden sm:block">
