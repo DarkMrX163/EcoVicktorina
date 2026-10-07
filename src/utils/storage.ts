@@ -2,6 +2,8 @@ import { LeaderboardEntry, CategoryId, GameMode, Achievement } from '../types';
 import { INITIAL_ACHIEVEMENTS } from '../data/achievements';
 import { PLAYER_RANKS } from '../data/districtInfo';
 
+import { saveOnlineLeaderboardEntry } from '../firebase';
+
 const LEADERBOARD_KEY = 'neftegorsk_eco_leaderboard_v1';
 const ACHIEVEMENTS_KEY = 'neftegorsk_eco_achievements_v1';
 const USER_PROFILE_KEY = 'neftegorsk_eco_user_profile_v1';
@@ -54,6 +56,12 @@ export function saveLeaderboardEntry(entry: Omit<LeaderboardEntry, 'id' | 'date'
   } catch (e) {
     console.error('Failed to save entry', e);
   }
+
+  // Asynchronously sync to global Firestore database
+  saveOnlineLeaderboardEntry(entry).catch((err) => {
+    console.error('Failed to save score to global Firestore:', err);
+  });
+
   return newEntry;
 }
 

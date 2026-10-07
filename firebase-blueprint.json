@@ -1,0 +1,26 @@
+{
+  "entities": {
+    "LeaderboardEntry": {
+      "title": "LeaderboardEntry",
+      "description": "Global leaderboard record for a quiz participant",
+      "type": "object",
+      "properties": {
+        "playerName": { "type": "string", "maxLength": 100 },
+        "settlement": { "type": "string", "maxLength": 100 },
+        "score": { "type": "number" },
+        "correctPercentage": { "type": "number" },
+        "category": { "type": "string", "maxLength": 50 },
+        "mode": { "type": "string", "maxLength": 50 },
+        "rankTitle": { "type": "string", "maxLength": 150 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["playerName", "settlement", "score", "correctPercentage", "category", "mode", "rankTitle"]
+    }
+  },
+  "firestore": {
+    "/leaderboard/{entryId}": {
+      "schema": { "$ref": "#/entities/LeaderboardEntry" },
+      "description": "Global leaderboard collection for all participants across devices"
+    }
+  }
+}

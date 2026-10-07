@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { LeaderboardEntry, CategoryId } from '../types';
 import { getLeaderboard } from '../utils/storage';
+import { subscribeOnlineLeaderboard } from '../firebase';
 import { DISTRICT_SETTLEMENTS, PLAYER_RANKS } from '../data/districtInfo';
 import { CATEGORIES } from '../data/questions';
 
@@ -27,17 +28,30 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ onStartQuiz }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Real-time synchronization whenever anyone finishes a quiz
+  // Real-time synchronization across all devices via global Firestore database
   React.useEffect(() => {
-    const handleUpdate = () => {
-      setEntries(getLeaderboard());
+    // Subscribe to live online updates from Firestore
+    const unsubscribe = subscribeOnlineLeaderboard((onlineEntries) => {
+      if (onlineEntries && onlineEntries.length > 0) {
+        setEntries(onlineEntries);
+      } else {
+        setEntries(getLeaderboard());
+      }
+    });
+
+    const handleLocalUpdate = () => {
+      setEntries((current) => {
+        const local = getLeaderboard();
+        return local.length > current.length ? local : current;
+      });
     };
 
-    window.addEventListener('leaderboard_updated', handleUpdate);
-    window.addEventListener('storage', handleUpdate);
+    window.addEventListener('leaderboard_updated', handleLocalUpdate);
+    window.addEventListener('storage', handleLocalUpdate);
     return () => {
-      window.removeEventListener('leaderboard_updated', handleUpdate);
-      window.removeEventListener('storage', handleUpdate);
+      unsubscribe();
+      window.removeEventListener('leaderboard_updated', handleLocalUpdate);
+      window.removeEventListener('storage', handleLocalUpdate);
     };
   }, []);
 

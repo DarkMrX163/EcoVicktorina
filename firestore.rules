@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidLeaderboardEntry(data) {
+      return data.playerName is string && data.playerName.size() > 0 && data.playerName.size() <= 100
+          && data.settlement is string && data.settlement.size() > 0 && data.settlement.size() <= 100
+          && data.score is number && data.score >= 0
+          && data.correctPercentage is number && data.correctPercentage >= 0 && data.correctPercentage <= 100
+          && data.category is string && data.category.size() <= 50
+          && data.mode is string && data.mode.size() <= 50
+          && data.rankTitle is string && data.rankTitle.size() <= 150;
+    }
+
+    match /leaderboard/{entryId} {
+      allow read: if true;
+      allow create: if isValidLeaderboardEntry(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
