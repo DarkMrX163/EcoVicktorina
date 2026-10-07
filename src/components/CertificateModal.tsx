@@ -188,7 +188,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
     ctx.fillStyle = '#44403c';
     ctx.font = '14px sans-serif';
-    ctx.fillText('Самарская область • Отдел экологии и природных ресурсов', 600, 208);
+    ctx.fillText('Самарская область • Отдел экологии и природопользования', 600, 208);
 
     // Eco Badge Pill
     ctx.fillStyle = '#f0fdf4';
@@ -608,7 +608,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
               Администрация муниципального района Нефтегорский
             </p>
             <p className="text-[9px] sm:text-[10px] font-sans text-stone-600 uppercase tracking-wider">
-              Самарская область • Отдел экологии и природных ресурсов
+              Самарская область • Отдел экологии и природопользования
             </p>
 
             <div className="py-2">
