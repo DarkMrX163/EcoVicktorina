@@ -81,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <div className="relative w-10 h-12 sm:w-11 sm:h-14 flex items-center justify-center filter drop-shadow-md group-hover:scale-105 transition-transform">
               <img 
-                src="/coat-of-arms.svg" 
+                src="coat-of-arms.svg" 
                 alt="Герб Нефтегорского района" 
                 className="w-full h-full object-contain"
               />

@@ -338,7 +338,7 @@ export default function App() {
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-10 flex items-center justify-center filter drop-shadow-sm shrink-0">
-                <img src="/coat-of-arms.svg" alt="Герб Нефтегорского района" className="w-full h-full object-contain" />
+                <img src="coat-of-arms.svg" alt="Герб Нефтегорского района" className="w-full h-full object-contain" />
               </div>
               <div>
                 <p className="font-bold text-stone-800 dark:text-zinc-200">
