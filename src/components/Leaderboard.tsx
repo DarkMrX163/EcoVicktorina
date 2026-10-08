@@ -10,7 +10,9 @@ import {
   Calendar, 
   Sparkles,
   ChevronRight,
-  ShieldCheck
+  ShieldCheck,
+  Users,
+  CheckCircle2
 } from 'lucide-react';
 import { LeaderboardEntry, CategoryId } from '../types';
 import { getLeaderboard } from '../utils/storage';
@@ -55,6 +57,15 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ onStartQuiz }) => {
     };
   }, []);
 
+  // Participant Counters
+  const totalCompletedQuizzes = entries.length;
+  const uniqueParticipantsCount = new Set(
+    entries.map((e) => e.playerName.trim().toLowerCase()).filter(Boolean)
+  ).size;
+  const activeSettlementsCount = new Set(
+    entries.map((e) => e.settlement).filter((s) => s && s !== 'all')
+  ).size;
+
   // Filtered leaderboard
   const filteredEntries = entries.filter((entry) => {
     const matchesSettlement = selectedSettlement === 'all' || entry.settlement === selectedSettlement;
@@ -73,17 +84,67 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ onStartQuiz }) => {
     <div className="w-full max-w-5xl mx-auto space-y-6">
       {/* Header Banner */}
       <div className="bg-gradient-to-r from-emerald-800 via-teal-900 to-emerald-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
-        <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-400/30">
-            <Trophy className="w-3.5 h-3.5" />
-            Районный рейтинг экологов
+        <div className="relative z-10 max-w-3xl">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider border border-emerald-400/30">
+              <Trophy className="w-3.5 h-3.5 text-amber-300" />
+              Районный рейтинг экологов
+            </div>
+
+            {/* Counter Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 text-xs font-bold border border-amber-400/30 shadow-inner">
+              <Users className="w-4 h-4 text-amber-300 shrink-0" />
+              <span>Участников: <strong>{uniqueParticipantsCount}</strong></span>
+              <span className="opacity-40">•</span>
+              <span>Тестов: <strong>{totalCompletedQuizzes}</strong></span>
+            </div>
           </div>
+
           <h1 className="text-xl sm:text-3xl font-extrabold font-['Unbounded',sans-serif] tracking-tight">
             Таблица лидеров Нефтегорского района
           </h1>
           <p className="text-xs sm:text-sm text-emerald-100/90 mt-2 leading-relaxed">
             Рейтинг знатоков природопользования, раздельного сбора ТКО и охраны водных ресурсов среди жителей всех поселений нашего района.
           </p>
+
+          {/* Participant Counters Grid */}
+          <div className="mt-6 pt-5 border-t border-emerald-700/40 grid grid-cols-2 sm:grid-cols-3 gap-3 font-sans">
+            <div className="bg-emerald-950/40 backdrop-blur-sm rounded-2xl p-3.5 border border-emerald-500/20 flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-300 shrink-0">
+                <Users className="w-5 h-5 text-amber-300" />
+              </div>
+              <div>
+                <div className="text-[11px] text-emerald-200/80 font-medium">Участников викторины</div>
+                <div className="text-lg sm:text-xl font-black font-['Unbounded',sans-serif] text-white">
+                  {uniqueParticipantsCount} <span className="text-xs font-normal text-emerald-300">чел.</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-emerald-950/40 backdrop-blur-sm rounded-2xl p-3.5 border border-emerald-500/20 flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-300 shrink-0">
+                <CheckCircle2 className="w-5 h-5 text-emerald-300" />
+              </div>
+              <div>
+                <div className="text-[11px] text-emerald-200/80 font-medium">Тестов пройдено</div>
+                <div className="text-lg sm:text-xl font-black font-['Unbounded',sans-serif] text-white">
+                  {totalCompletedQuizzes}
+                </div>
+              </div>
+            </div>
+
+            <div className="col-span-2 sm:col-span-1 bg-emerald-950/40 backdrop-blur-sm rounded-2xl p-3.5 border border-emerald-500/20 flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-300 shrink-0">
+                <MapPin className="w-5 h-5 text-sky-300" />
+              </div>
+              <div>
+                <div className="text-[11px] text-emerald-200/80 font-medium">Поселений района</div>
+                <div className="text-lg sm:text-xl font-black font-['Unbounded',sans-serif] text-white">
+                  {activeSettlementsCount}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Top-3 Podium Preview if available */}
